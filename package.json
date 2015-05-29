@@ -1,0 +1,49 @@
+{
+  "name": "unique-number",
+  "description": "Generate a unique number.",
+  "version": "1.0.0",
+  "homepage": "https://github.com/stevenvachon/unique-number",
+  "author": {
+    "name": "Steven Vachon",
+    "email": "contact@svachon.com",
+    "url": "http://www.svachon.com/"
+  },
+  "main": "lib",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/stevenvachon/unique-number.git"
+  },
+  "bugs": {
+    "url": "https://github.com/stevenvachon/unique-number/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://opensource.org/licenses/mit-license.php"
+    }
+  ],
+  "devDependencies": {
+    "chai": "^2.3.0",
+    "mocha": "^2.2.5",
+    "mocha-phantomjs": "^3.5.3",
+    "phantomjs": "^1.9.17"
+  },
+  "engines": {
+    "node": ">= 0.10"
+  },
+  "scripts": {
+    "test_browser": "mocha-phantomjs test/browser.html",
+    "test_server": "mocha test/ --reporter spec --check-leaks --bail",
+    "test": "npm run test_server && npm run test_browser"
+  },
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "id",
+    "uid",
+    "unique",
+    "unique id",
+    "uniqueid"
+  ]
+}

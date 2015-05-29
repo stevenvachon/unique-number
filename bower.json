@@ -1,0 +1,22 @@
+{
+  "name": "unique-number",
+  "homepage": "https://github.com/stevenvachon/unique-number",
+  "authors": [
+    "Steven Vachon <contact@svachon.com>"
+  ],
+  "description": "Generate a unique number.",
+  "main": "index.js",
+  "keywords": [
+    "id",
+    "uid",
+    "unique",
+    "unique id",
+    "uniqueid"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "node_modules",
+    "package.json",
+    "test"
+  ]
+}

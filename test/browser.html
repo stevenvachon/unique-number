@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>uniqueNumber</title>
+<script src="../index.js"></script>
+<script src="../node_modules/chai/chai.js"></script>
+<script src="../node_modules/mocha/mocha.js"></script>
+<script>mocha.setup('bdd'); expect=chai.expect</script>
+<link rel="stylesheet" href="../node_modules/mocha/mocha.css"/>
+</head>
+<body>
+<div id="mocha"></div>
+<script>
+
+// Copied from server.js
+describe("Browser Tests", function()
+{
+	it("should not produce any duplicates", function(done)
+	{
+		var i;
+		var numbers = [];
+		
+		for (i=0; i<100; i++)
+		{
+			numbers.push( uniqueNumber() );
+		}
+		
+		for (i=0; i<numbers.length; i++)
+		{
+		    if (i === 0) continue;
+		    
+		    else if (numbers[i] === numbers[i-1])
+		    {
+		        done( new Error("Found duplicate number") );
+		        break;
+		    }
+		}
+		
+		done();
+	});
+	
+	
+	
+	it("should reset", function(done)
+	{
+		var actualTimeout,afterFirstReset,afterSecondReset,beforeTimeout,i,lastIteration;
+		var firstNumber = uniqueNumber();
+		var numIterations = 100;
+		
+		for (i=0; i<numIterations; i++) lastIteration = uniqueNumber();
+		
+		uniqueNumber.reset();
+		afterFirstReset = uniqueNumber();
+		
+		beforeTimeout = Date.now();
+		
+		setTimeout( function()
+		{
+			actualTimeout = Date.now() - beforeTimeout;
+			
+			uniqueNumber.reset();
+			afterSecondReset = uniqueNumber();
+			
+			expect(lastIteration).to.equal(firstNumber + numIterations);
+			expect(afterSecondReset).to.equal(afterFirstReset + actualTimeout);
+			
+			done();
+			
+		}, 100);
+	});
+});
+
+
+
+// Run tests
+if (window.mochaPhantomJS) mochaPhantomJS.run();
+else mocha.run();
+
+</script>
+</body>
+</html>
