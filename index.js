@@ -1,46 +1,52 @@
 (function()
 {
 	"use strict";
-	var previous = 0;
 	
 	
 	
-	function uniqueNumber()
+	function UniqueNumber()
 	{
-		var date = Date.now();
-		
-		// If created at same millisecond as previous
-		if (date <= previous)
-		{
-			date = ++previous;
-		}
-		else
-		{
-			previous = date;
-		}
-		
-		return date;
+		this.reset();
 	}
 	
 	
 	
-	uniqueNumber.reset = function()
+	UniqueNumber.prototype.generate = function()
 	{
-		previous = 0;
+		var date = Date.now();
+		
+		// If created at same millisecond as previous
+		if (date <= this.previous)
+		{
+			date = ++this.previous;
+		}
+		else
+		{
+			this.previous = date;
+		}
+		
+		return date;
+	};
+	
+	
+	
+	UniqueNumber.prototype.reset = function()
+	{
+		this.previous = 0;
 	};
 	
 	
 	
 	if (typeof module==="object" && typeof module.exports==="object")
 	{
-		module.exports = uniqueNumber;
+		module.exports = UniqueNumber;
 	}
 	else if (typeof define==="function" && define.amd)
 	{
-		define("unique-number", [], function(){ return uniqueNumber });
+		define("unique-number", [], function(){ return UniqueNumber });
 	}
 	else
 	{
-		window.uniqueNumber = uniqueNumber;
+		window.UniqueNumber = UniqueNumber;
 	}
 })();

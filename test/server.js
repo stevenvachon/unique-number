@@ -1,5 +1,5 @@
 "use strict";
-var uniqueNumber = require("../");
+var UniqueNumber = require("../");
 var expect = require("chai").expect;
 
 
@@ -10,10 +10,11 @@ describe("Server Tests", function()
 	{
 		var i;
 		var numbers = [];
+		var uniqueNumber = new UniqueNumber();
 		
 		for (i=0; i<100; i++)
 		{
-			numbers.push( uniqueNumber() );
+			numbers.push( uniqueNumber.generate() );
 		}
 		
 		for (i=0; i<numbers.length; i++)
@@ -35,13 +36,15 @@ describe("Server Tests", function()
 	it("should reset", function(done)
 	{
 		var actualTimeout,afterFirstReset,afterSecondReset,beforeTimeout,i,lastIteration;
-		var firstNumber = uniqueNumber();
 		var numIterations = 100;
+		var uniqueNumber = new UniqueNumber();
 		
-		for (i=0; i<numIterations; i++) lastIteration = uniqueNumber();
+		var firstNumber = uniqueNumber.generate();
+		
+		for (i=0; i<numIterations; i++) lastIteration = uniqueNumber.generate();
 		
 		uniqueNumber.reset();
-		afterFirstReset = uniqueNumber();
+		afterFirstReset = uniqueNumber.generate();
 		
 		beforeTimeout = Date.now();
 		
@@ -50,10 +53,10 @@ describe("Server Tests", function()
 			actualTimeout = Date.now() - beforeTimeout;
 			
 			uniqueNumber.reset();
-			afterSecondReset = uniqueNumber();
+			afterSecondReset = uniqueNumber.generate();
 			
 			expect(lastIteration).to.equal(firstNumber + numIterations);
-			expect(afterSecondReset).to.equal(afterFirstReset + actualTimeout);
+			expect(afterSecondReset).to.be.within(afterFirstReset+actualTimeout-1, afterFirstReset+actualTimeout+1);    // margin of error
 			
 			done();
 			

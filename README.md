@@ -2,24 +2,26 @@
 > Generate a unique number.
 
 ```js
-var uniqueNumber = require("unique-number");
+var UniqueNumber = require("unique-number");
 
-// Timestamp
-console.log( uniqueNumber() );
+var uniqueNumber = new UniqueNumber();
 
-// Iterated timestamps
+console.log( uniqueNumber.generate() );
+```
+
+When multiple requests are made per millisecond, the timestamp is simply iterated. After a few billion runs—typically when your operations are complete—you should run `uniqueNumber.reset()` to avoid going beyond [`Number.MAX_SAFE_INTEGER`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER).
+
+```js
 for (var i=0; i<1000; i++) {
-	console.log( uniqueNumber() );
+	console.log( uniqueNumber.generate() );
 }
 
 // Resets timestamp+1000 back to timestamp
 uniqueNumber.reset();
 
 setTimeout( function() {
-	console.log( uniqueNumber() );
+	console.log( uniqueNumber.generate() );
 }, 100);
 ```
-
-When multiple requests are made per millisecond, the timestamp is simply iterated. After a few billion runs—typically when your operations are complete—you should run `uniqueNumber.reset()` to avoid passing [`Number.MAX_SAFE_INTEGER`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER).
 
 Because this library is so small and simple, it requires this one extra step. If you disapprove, you may prefer [cuid](https://npmjs.com/cuid), [puid](https://npmjs.com/puid) or [shortid](https://npmjs.com/shortid).
