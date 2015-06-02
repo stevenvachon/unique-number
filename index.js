@@ -4,8 +4,15 @@
 	
 	
 	
-	function UniqueNumber()
+	function UniqueNumber(useDate)
 	{
+		// Support not using `new`
+		if (this instanceof UniqueNumber === false)
+		{
+			return new UniqueNumber(useDate);
+		}
+		
+		this.useDate = useDate===true;
 		this.reset();
 	}
 	
@@ -13,19 +20,26 @@
 	
 	UniqueNumber.prototype.generate = function()
 	{
-		var date = Date.now();
+		var current;
+		
+		if (this.useDate === false)
+		{
+			return this.previous++;
+		}
+		
+		current = Date.now();
 		
 		// If created at same millisecond as previous
-		if (date <= this.previous)
+		if (current <= this.previous)
 		{
-			date = ++this.previous;
+			current = ++this.previous;
 		}
 		else
 		{
-			this.previous = date;
+			this.previous = current;
 		}
 		
-		return date;
+		return current;
 	};
 	
 	
