@@ -2,6 +2,7 @@
   "name": "unique-number",
   "description": "Generate a unique number.",
   "version": "2.0.1",
+  "license": "MIT",
   "homepage": "https://github.com/stevenvachon/unique-number",
   "author": {
     "name": "Steven Vachon",
@@ -16,17 +17,11 @@
   "bugs": {
     "url": "https://github.com/stevenvachon/unique-number/issues"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "http://opensource.org/licenses/mit-license.php"
-    }
-  ],
   "devDependencies": {
-    "chai": "^2.3.0",
-    "mocha": "^2.2.5",
-    "mocha-phantomjs": "^3.5.3",
-    "phantomjs": "^1.9.17"
+    "chai": "^3.2.0",
+    "mocha": "^2.3.2",
+    "mocha-phantomjs": "3.6.0",
+    "phantomjs": "1.9.7-15"
   },
   "engines": {
     "node": ">= 0.10"
@@ -37,7 +32,8 @@
     "test": "npm run test_server && npm run test_browser"
   },
   "files": [
-    "index.js"
+    "index.js",
+    "license"
   ],
   "keywords": [
   	"count",
